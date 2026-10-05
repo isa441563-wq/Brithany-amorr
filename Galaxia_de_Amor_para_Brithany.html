@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Brithany 💗</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#020006;color:white;font-family:Arial,sans-serif}
+canvas{position:fixed;inset:0;width:100%;height:100%}
+.center{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;pointer-events:none;text-shadow:0 0 12px #ff55cc,0 0 28px #ff1493}
+h1{font-size:clamp(30px,8vw,60px);margin:0}.name{font-size:clamp(25px,6vw,42px);margin-top:8px}.msg{position:fixed;bottom:8%;width:90%;text-align:center;font-size:clamp(18px,4vw,28px);font-weight:bold;text-shadow:0 0 12px #ff55cc}.heart{font-size:90px;filter:drop-shadow(0 0 18px #ff39bd);animation:beat 1.2s infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="center"><h1>Feliz cumpleaños, mi amor 💗</h1><div class="name">Brithany</div><div class="heart">💗</div></div>
+<div class="msg" id="msg">Te amo muchísimo, Brithany ✨</div>
+<script>
+const c=document.getElementById("c"),x=c.getContext("2d"),m=document.getElementById("msg");
+let w,h,t=0,p=[],s=[],i=0;
+const texts=["Te amo muchísimo, Brithany 💗","Gracias por existir ✨","La vida es más bonita contigo 💕","Siempre juntos ∞","Eres mi persona favorita 🥺","Que todos tus sueños se hagan realidad 💗","Feliz cumpleaños, mi amor 🎂","Tú y yo... siempre 💗"];
+function size(){w=innerWidth;h=innerHeight;c.width=w*devicePixelRatio;c.height=h*devicePixelRatio;x.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);p=[];s=[];for(let i=0;i<900;i++){let a=Math.random()*7,r=Math.pow(Math.random(),.65)*Math.min(w,h)*.5;p.push({a,r,z:.4+Math.random()*1.8,o:.2+Math.random()*.8})}for(let i=0;i<160;i++)s.push({x:Math.random()*w,y:Math.random()*h,r:.3+Math.random()*1.5,o:.2+Math.random()*.8})}
+function hp(u){let a=u*6.283;return[16*Math.sin(a)**3,-(13*Math.cos(a)-5*Math.cos(2*a)-2*Math.cos(3*a)-Math.cos(4*a))]}
+function draw(){t+=.006;x.fillStyle="#020006";x.fillRect(0,0,w,h);for(let q of s){x.globalAlpha=q.o;x.fillStyle="#fff";x.beginPath();x.arc(q.x,q.y,q.r,0,7);x.fill()}let cx=w/2,cy=h*.58;x.globalAlpha=1;for(let q of p){let a=q.a+t*.3,px=cx+Math.cos(a)*q.r,py=cy+Math.sin(a)*q.r*.38;x.globalAlpha=q.o;x.fillStyle="#ff3dbf";x.beginPath();x.arc(px,py,q.z,0,7);x.fill()}for(let j=0;j<260;j++){let u=(j/260+t*.04)%1,q=hp(u),px=cx+q[0]*Math.min(w,h)*.012,py=cy-h*.28+q[1]*Math.min(w,h)*.012;x.globalAlpha=.7;x.fillStyle="#ff72d2";x.beginPath();x.arc(px,py,1.5,0,7);x.fill()}x.globalAlpha=1;requestAnimationFrame(draw)}
+addEventListener("resize",size);size();draw();setInterval(()=>{i=(i+1)%texts.length;m.textContent=texts[i]},2600);
+</script>
+</body>
+</html>
